@@ -4,7 +4,7 @@ const userRoutes = require('./routes/user.routes');
 const cookieParser = require('cookie-parser');
 require('dotenv').config({path:'./config/.env'})
 require('./config/dataBase');
-const {checkUser} = require('./middleware/auth.middleware')
+const {checkUser, requireAuth} = require('./middleware/auth.middleware')
 const app = express();
 
 // Application
@@ -14,7 +14,10 @@ app.use(cookieParser());
 
 
 //jwt 
-app.get('*', checkUser)
+app.get('*', checkUser);
+app.get('/jwtid', requireAuth, (req, res)=>{
+    res.status(200).send(res.locals.user._id)
+})
 
 
 // Pour chaques routes, commencez par le chemin suivant: 

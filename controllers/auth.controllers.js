@@ -1,6 +1,8 @@
 const UserModel = require('../models/user.models');
 const jwt = require('jsonwebtoken');
 const { restart } = require('nodemon');
+const { signUpErrors } = require('../utils/error.utils');
+
 
 
 const maxAge = 2 * 24 * 60 * 60 * 1000;
@@ -20,7 +22,8 @@ module.exports.signUp = async(req, res) => {
         res.status(201).json({user:user._id})
     }
     catch(err){
-        res.status(200).send({ err })
+        const errors = signUpErrors(err);
+        res.status(200).send({ errors })
     }
 }
 
