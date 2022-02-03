@@ -25,7 +25,8 @@ Libr est developpé sur Node.Js. L'API est actuellement connecté à MongoDB.
 
 ## Quelques captures d'écrans : 
 
-NONE
+
+<img width="930" alt="Capture" src="https://user-images.githubusercontent.com/73883090/152308805-a1e44dcb-1aa9-4be2-ab8b-9142a1eb83fd.PNG">
 
 
 ## Pré-Requis :
