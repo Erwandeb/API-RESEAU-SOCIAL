@@ -1,12 +1,31 @@
 # Bienvenue sur LIBR
 
-Il s'agit d'une API de réseau social avec deux routes.
+Il s'agit d'une API capable de gérer une partie utilisateurs et une partie "post" pour une utilisation sur forum ou sur réseau social.
+Libr est developpé sur Node.Js. L'API est actuellement connecté à MongoDB.
 
+### Techniques de développement Abordées :
+
+- Configurer une API
+- Authentification par token 
+- Gestion du CRUD 
+- Sécurisation de l'API
+
+### Outils techniques utilisés :
+
+- Node.Js
+- Express.js
+- Mongoose
+- JWT
+- BCryt
+- CookieParser
+- Validator email (regex)
+- MongoDB
+- PostMan
 
 
 ## Quelques captures d'écrans : 
 
-
+NONE
 
 
 ## Pré-Requis :
