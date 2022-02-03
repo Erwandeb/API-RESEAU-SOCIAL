@@ -3,14 +3,14 @@
 Il s'agit d'une API capable de gérer une partie utilisateurs et une partie "post" pour une utilisation sur forum ou sur réseau social.
 Libr est developpé sur Node.Js. L'API est actuellement connecté à MongoDB.
 
-### Techniques de développement Abordées :
+### Techniques de développement :
 
 - Configurer une API
 - Authentification par token 
 - Gestion du CRUD 
 - Sécurisation de l'API
 
-### Outils techniques utilisés :
+### Outils techniques :
 
 - Node.Js
 - Express.js
