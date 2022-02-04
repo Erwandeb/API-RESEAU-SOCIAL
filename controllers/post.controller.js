@@ -29,7 +29,7 @@ module.exports.createPost = async (req, res) => {
 }
 
 module.exports.updatePost = (req, res) => {
-    if(!ObjectId.isValid(req.params.id))
+    if(!objectID.isValid(req.params.id))
         return res.status(400).send('ID inconnu' + req.params.id)
 
     const updateRecord = {
@@ -51,7 +51,7 @@ module.exports.updatePost = (req, res) => {
 }
 
 module.exports.deletePost = (req, res) => {
-    if(!ObjectId.isValid(req.params.id))
+    if(!ObjectID.isValid(req.params.id))
     return res.status(400).send('ID inconnu' + req.params.id)
 
     postModel.findByIdAndRemove(
@@ -62,7 +62,6 @@ module.exports.deletePost = (req, res) => {
             } else{
                 console.log("Erreur from deletePost" + err)
             }
-            
         }
     )
 }
