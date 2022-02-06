@@ -44,11 +44,13 @@ module.exports.updatePost = (req, res) => {
             if(!err){
                 res.send(docs);
             } else{
-                console.log("Erreur from updatePost :" + err )
+                console.log("Erreur provenant d'updatePost :" + err )
             }
         }
     )
 }
+
+
 
 module.exports.deletePost = (req, res) => {
     if(!ObjectID.isValid(req.params.id))
@@ -60,7 +62,7 @@ module.exports.deletePost = (req, res) => {
             if(!err){
                 res.send(docs);
             } else{
-                console.log("Erreur from deletePost" + err)
+                console.log("Erreur provenant de deletePost" + err)
             }
         }
     )
