@@ -81,7 +81,9 @@ module.exports.likePost = async (req, res) => {
             },
             {new : true},
             (err, docs) => {
-                if (err) return res.status(400).send(err)
+                if(err){
+                    return res.status(400).send(err)
+                }
             }
         )
         await userModel.findByIdAndUpdate(
@@ -91,14 +93,16 @@ module.exports.likePost = async (req, res) => {
             },
             {new : true},
             (err, docs) => {
-                if(!err) res.send(docs);
-                else return res.status(400).send(err)
+                if(!err){
+                    res.send(docs);
+                } else {
+                    return res.status(400).send(err)
+                }
             }
         )
     } catch(err) {
         return res.status(401).send(err)
     }
-
 }
 
 module.exports.unlikePost = async (req, res) => {
