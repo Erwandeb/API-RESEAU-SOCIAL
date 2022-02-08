@@ -9,7 +9,7 @@ module.exports.readPost = (req, res) => {
         if(!err) res.send(docs);
         else console.log('Impossible de retrouver les données' + err);
 
-    })
+    }).sort({createdAt: -1});
 }
 
 module.exports.createPost = async (req, res) => {
@@ -139,23 +139,68 @@ module.exports.unlikePost = async (req, res) => {
     } catch(err) {
         return res.status(401).send(err)
     }
-
 }
 
  
 module.exports.commentPost = async (req, res) => {
     if(!objectID.isValid(req.params.id))
     return res.status(400).send('ID inconnu' + req.params.id)
+
+    try{
+        return postModel.findByIdAndUpdate(
+            req.params.id,
+            {
+                $push : {
+                    comments : {
+                        commenterId : req.body.commenterId,
+                        commenterPseudo : req.body.commenterPseudo,
+                        text : req.body.text,
+                        timestamp : new Date().getTime()
+                    }
+                }
+            },
+            {new : true },
+            (err, docs) => {
+                if(!err) return res.send(docs);
+                else return res.status(400).send(err);
+            }
+        )
+    }catch(err){
+        return res.status(401).send(err)
+    }
 }
 
  
 module.exports.editCommentPost = async (req, res) => {
     if(!objectID.isValid(req.params.id))
     return res.status(400).send('ID inconnu' + req.params.id)
+    
+    try{
+        return postModel.findById(
+            req.params.id,
+            (err,docs) => {
+                const theComment = docs.comments.find((comment) => {
+                    comment._id.equals(req.body.commentId)
+                })
+                if(!theComment){
+                    return res.status(404).send("commentaire non trouvé")
+                };
+            }
+        )
+    }catch(err){
+        return res.status(401).send(err)
+    }
 }
 
  
+
 module.exports.deleteCommentPost = async (req, res) => {
     if(!objectID.isValid(req.params.id))
     return res.status(400).send('ID inconnu' + req.params.id)
+
+    try{
+
+    }catch(err){
+        return res.status(401).send(err)
+    }
 }
