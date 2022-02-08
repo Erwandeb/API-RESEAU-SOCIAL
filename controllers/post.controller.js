@@ -53,7 +53,7 @@ module.exports.updatePost = (req, res) => {
 
 
 module.exports.deletePost = (req, res) => {
-    if(!ObjectID.isValid(req.params.id))
+    if(!objectID.isValid(req.params.id))
     return res.status(400).send('ID inconnu' + req.params.id)
 
     postModel.findByIdAndRemove(
@@ -70,7 +70,7 @@ module.exports.deletePost = (req, res) => {
 
 
 module.exports.likePost = async (req, res) => {
-    if(!ObjectID.isValid(req.params.id))
+    if(!objectID.isValid(req.params.id))
     return res.status(400).send('ID inconnu' + req.params.id)
 
     try{
@@ -106,8 +106,8 @@ module.exports.likePost = async (req, res) => {
 }
 
 module.exports.unlikePost = async (req, res) => {
-    if(!ObjectID.isValid(req.params.id))
+    if(!objectID.isValid(req.params.id))o
+
     return res.status(400).send('ID inconnu' + req.params.id)
 
-    
 }
