@@ -3,13 +3,21 @@ const postController = require('../controllers/post.controller');
 
 
 
-// Gestion des utilisateurs 
+// Gestion des posts
 router.get('/', postController.readPost);
 router.post('/', postController.createPost);
 router.put('/:id', postController.updatePost);
 router.delete('/:id', postController.deletePost);
 router.patch('/like-post/:id', postController.likePost);
-router.patch('/unlike-post/:id', postController.unlikePost)
+router.patch('/unlike-post/:id', postController.unlikePost);
+
+
+// Gestions des commentaires
+router.patch('/comment-post/:id', postController.commentPost);
+router.patch('/edit-comment-post/:id', postController.editCommentPost);
+router.patch('/delete-comment-post/:id', postController.deleteCommentPost);
+
+
 
 
 module.exports = router;
