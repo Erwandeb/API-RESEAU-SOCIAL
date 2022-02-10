@@ -183,8 +183,16 @@ module.exports.editCommentPost = async (req, res) => {
                     comment._id.equals(req.body.commentId)
                 })
                 if(!theComment){
-                    return res.status(404).send("commentaire non trouvé")
+                    return res.status(404).send("commentaire non trouvé");
                 };
+                theComment.text = req.body.text;
+
+                return docs.save((err) => {
+                    if(!err){
+                        return res.status(200).send(docs);
+                    }
+                    return res.statu(500).send(err);
+                })
             }
         )
     }catch(err){
