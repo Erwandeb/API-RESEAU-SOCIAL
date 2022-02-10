@@ -207,7 +207,24 @@ module.exports.deleteCommentPost = async (req, res) => {
     return res.status(400).send('ID inconnu' + req.params.id)
 
     try{
-
+        return postModel.findByIdAndUpdate(
+            req.params.id,
+            {
+                $pull:{
+                    comments:{
+                        _id: req.body.commentId,
+                    },
+                },
+            },
+            {new : true},
+            (err, docs) => {
+                if(!err) {
+                    return res.send(docs);
+                } else{
+                    return res.status(400).send(err);
+                }
+            }
+        );
     }catch(err){
         return res.status(401).send(err)
     }
