@@ -1,6 +1,7 @@
 const UserModel = require('../models/user.models');
 const fs = require('fs');
 const { promisify } = require('util');
+const { upLoadErrors } = require('../utils/error.utils');
 const pipeline = promisify(require('stream').pipeline);
 
 module.exports.uploadProfil = async (req, res) => {
@@ -15,8 +16,15 @@ module.exports.uploadProfil = async (req, res) => {
         if(req.file.size > 500000) throw Error("max size");
     }
     catch (err){
-        return res.status(201).json(err);
+        const errors = upLoadErrors(err)
+        return res.status(201).json({errors});
     }
 
     const fileName = req.body.name + ".jpg";
+    await pipeline(
+        req.file.stream,
+        fs.createWriteStream(
+            `${__dirname}/../client/public/uploads/profil/${fileName}`
+        )
+    )
 };
