@@ -15,11 +15,9 @@ module.exports.uploadProfil = async (req, res) => {
         ){
             throw Error("Format du fichier invalide");
         }
-            
         if(req.file.size > 500000){
             throw Error("max size");
         } 
-       
     }
     catch(err){
         const errors = upLoadErrors(err);
