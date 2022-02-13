@@ -4,6 +4,8 @@ const { promisify } = require('util');
 const { upLoadErrors } = require('../utils/error.utils');
 const pipeline = promisify(require('stream').pipeline);
 
+
+
 module.exports.uploadProfil = async (req, res) => {
     try{
         if(
@@ -13,18 +15,23 @@ module.exports.uploadProfil = async (req, res) => {
         )
             throw Error("Format du fichier invalide");
 
-        if(req.file.size > 500000) throw Error("max size");
+        if(req.file.size > 5000000){
+            throw Error("max size");
+        } 
     }
-    catch (err){
-        const errors = upLoadErrors(err)
-        return res.status(201).json({errors});
+    catch(err){
+        const errors = upLoadErrors(err);
+        return res.status(201).json({ errors });
     }
 
     const fileName = req.body.name + ".jpg";
+
     await pipeline(
         req.file.stream,
         fs.createWriteStream(
             `${__dirname}/../client/public/uploads/profil/${fileName}`
         )
     )
+
+
 };
