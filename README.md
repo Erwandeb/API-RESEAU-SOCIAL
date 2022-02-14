@@ -1,7 +1,7 @@
-# Bienvenue sur LIBR
+# Bienvenue sur L'api de reseau social
 
 Il s'agit d'une API capable de gérer une partie utilisateurs et une partie "post" pour une utilisation sur forum ou sur réseau social.
-Libr est developpé sur Node.Js. L'API est actuellement connecté à MongoDB.
+Elle est developpée sur Node.Js. L'API est actuellement connecté à MongoDB.
 
 ### Techniques de développement :
 
