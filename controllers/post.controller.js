@@ -1,6 +1,11 @@
 const postModel = require('../models/post.model');
 const userModel = require('../models/user.models');
+const { upLoadErrors } = require('../utils/error.utils');
 const objectID = require('mongoose').Types.ObjectId;
+const fs = require('fs');
+const { promisify } = require('util');
+const pipeline = promisify(require('stream').pipeline);
+
 
 
 
@@ -13,13 +18,38 @@ module.exports.readPost = (req, res) => {
 }
 
 module.exports.createPost = async (req, res) => {
+
+    let fileName;
+
+        if(req.file != null){
+            try{
+                if(req.file.size > 500000){
+                    throw Error("max Size");
+                }
+            } catch(err){
+                const erros = upLoadErrors(err);
+                return res.stauts(201).json({errors})
+            }
+           fileName = req.body.posterId + Date.now() + '.jpg';
+
+           await pipeline(
+            req.file.stream,
+            fs.createWriteStream(
+                `${__dirname}/../client/public/uploads/profil/${fileName}`
+            )
+        )
+    }
+
     const newPost = new postModel({
         authorId : req.body.authorId,
         message : req.body.message,
+        picture: req.file != null ? "./upload/posts/"+ filename : "",
         video : req.body.video,
         likers : [],
         comments : [],
     });
+
+
     try{
         const post = await newPost.save();
         return res.status(201).json(post);
